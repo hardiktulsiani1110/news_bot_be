@@ -12,6 +12,7 @@ import {
   Page,
   Browser,
 } from "@langchain/community/document_loaders/web/puppeteer";
+import UserAgent from "user-agents";
 import { qdrantVectorStore } from "../config/vector-store";
 import { VectorStore } from "@langchain/core/vectorstores";
 import { sleep } from "../utils/helper";
@@ -52,13 +53,19 @@ export class ArticleQueue {
       async (job: Job) => {
         logger.info(`job ${job.id} started`);
         const { source, id, url } = job.data;
+        const randomUserAgent = new UserAgent().toString();
         const loader = new PuppeteerWebBaseLoader(url, {
           launchOptions: {
             headless: true,
-            args: ["--no-sandbox", "--disable-setuid-sandbox"],
+            args: [
+              "--no-sandbox",
+              "--disable-setuid-sandbox",
+              `--user-agent=${randomUserAgent}`,
+            ],
           },
           gotoOptions: {
             waitUntil: "domcontentloaded",
+            timeout: 15000, //15s
           },
           evaluate: async (page: Page, browser: Browser) => {
             await page.waitForSelector("body");

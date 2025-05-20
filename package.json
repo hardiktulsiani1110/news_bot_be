@@ -29,6 +29,7 @@
     "puppeteer": "^24.8.2",
     "redis": "^5.0.1",
     "rss-parser": "^3.13.0",
+    "user-agents": "^1.1.544",
     "uuid": "^11.1.0",
     "winston": "^3.17.0"
   },
@@ -37,6 +38,7 @@
     "@types/express": "^5.0.1",
     "@types/morgan": "^1.9.9",
     "@types/pg": "^8.15.1",
+    "@types/user-agents": "^1.0.4",
     "prettier": "^3.5.3",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.8.3"
