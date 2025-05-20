@@ -55,6 +55,7 @@ export class ArticleQueue {
         const loader = new PuppeteerWebBaseLoader(url, {
           launchOptions: {
             headless: true,
+            args: ["--no-sandbox", "--disable-setuid-sandbox"],
           },
           gotoOptions: {
             waitUntil: "domcontentloaded",
